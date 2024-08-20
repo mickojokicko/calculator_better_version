@@ -6,50 +6,50 @@ const deleteBtn = document.getElementById("delete");
 const numericButtons = Array.from(document.querySelectorAll(".btn"));
 // functions and Listeners
 function clearField() {
-  displayResultField.value = "";
+    displayResultField.value = "";
 }
 function deleteOneCharacter() {
-  displayResultField.value = displayResultField.value.slice(0, -1);
+    displayResultField.value = displayResultField.value.slice(0, -1);
 }
 // -------------------------------
 numericButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (
-      button.innerText !== "AC" &&
-      button.innerText !== "Del" &&
-      button.innerText !== "="
-    ) {
-      displayResultField.value += button.innerText;
-    }
-  });
+    button.addEventListener("click", () => {
+        if (button.innerText !== "AC" &&
+            button.innerText !== "Del" &&
+            button.innerText !== "=") {
+            displayResultField.value += button.innerText;
+        }
+    });
 });
 function calculate() {
-  try {
-    if (displayResultField.value === "") {
-      return;
+    try {
+        if (displayResultField.value === "") {
+            return;
+        }
+        let result = eval(displayResultField.value);
+        if (typeof result === "number" && !Number.isInteger(result)) {
+            result = parseFloat(result.toFixed(3));
+        }
+        displayResultField.value = result.toString();
     }
-    let result = eval(displayResultField.value);
-    if (typeof result === "number" && !Number.isInteger(result)) {
-      result = parseFloat(result.toFixed(3));
+    catch (err) {
+        displayResultField.value = "Error, be careful 😮";
+        setTimeout(() => {
+            displayResultField.value = "0";
+            clearField();
+        }, 1200);
     }
-    displayResultField.value = result.toString();
-  } catch (err) {
-    displayResultField.value = "Error, be careful 😮";
-    setTimeout(() => {
-      displayResultField.value = "0";
-      clearField();
-    }, 1200);
-  }
 }
 function keyboardHendler(event) {
-  const key = event.key;
-  const keyNumber = +key;
-  console.log(key, keyNumber);
-  if (key === "Enter") {
-    calculate();
-  } else if (key === "Escape") {
-    clearField();
-  }
+    const key = event.key;
+    const keyNumber = +key;
+    console.log(key, keyNumber);
+    if (key === "Enter") {
+        calculate();
+    }
+    else if (key === "Escape") {
+        clearField();
+    }
 }
 clearFieldBtn.addEventListener("click", clearField);
 deleteBtn.addEventListener("click", deleteOneCharacter);
