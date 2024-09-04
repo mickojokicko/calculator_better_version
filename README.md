@@ -1,7 +1,4 @@
-CALCULATOR__
-
-
-# Kalkulator Aplikacija
+CALCULATOR app
 
 Ovaj projekat predstavlja jednostavnu kalkulator aplikaciju napravljenu pomoću TypeScript-a. Kalkulator podržava osnovne aritmetičke operacije i ima jednostavan korisnički interfejs koji omogućava lako korišćenje.
 
